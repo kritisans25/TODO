@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To Do</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="content">
+    <h1>📝 TO DO</h1>
+
+    {% if tasks|length < 1 %}
+      <h3 style="text-align:center; color:#666;">No tasks yet — create one below!</h3>
+    {% else %}
+      <table>
+        <tr>
+          <th>Task</th>
+          <th>Added</th>
+          <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+          <td>{{ task.content }}</td>
+          <td>{{ task.created.strftime('%d %b %Y') }}</td>
+          <td>
+            <a href="/edit/{{ task.id }}">✏️ Edit</a> |
+            <a href="/delete/{{ task.id }}">🗑 Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+
+    <form action="/" method="POST">
+      <input type="text" name="task" placeholder="Enter new task..." required>
+      <input type="submit" value="Add Task">
+    </form>
+  </div>
+</body>
+</html>

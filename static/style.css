@@ -1,0 +1,104 @@
+/* ===== Global ===== */
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f5f7fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* ===== Container ===== */
+.content {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  margin-top: 50px;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Table ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 25px;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  color: #555;
+  font-weight: 600;
+}
+
+td {
+  color: #444;
+}
+
+/* ===== Buttons & Links ===== */
+a {
+  text-decoration: none;
+  color: #3498db;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #21618c;
+}
+
+/* ===== Input & Button ===== */
+input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: #3498db;
+}
+
+input[type="submit"],
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #3498db;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background-color: #2e86c1;
+  transform: translateY(-1px);
+}
+
+
+.back-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #3498db;
+  font-size: 14px;
+}
