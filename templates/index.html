@@ -1,41 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>To Do</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Smash 2.0 - Login / Register</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            text-align: center;
+            width: 350px;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .button-login, .button-register, .login-google {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .button-login {
+            background: #4CAF50;
+        }
+        .button-login:hover {
+            background: #45a049;
+        }
+
+        .button-register {
+            background: #ff5f6d;
+        }
+        .button-register:hover {
+            background: #ff3b4d;
+        }
+
+        .login-google {
+            background: #db4437;
+        }
+        .login-google:hover {
+            background: #c23321;
+        }
+
+        .error {
+            background-color: rgba(255, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #ffd5d5;
+        }
+    </style>
 </head>
 <body>
-  <div class="content">
-    <h1>📝 Task Smash 2.0</h1>
+    <div class="container">
+        <h1>Welcome to Task Smash 2.0</h1>
 
-    {% if tasks|length < 1 %}
-      <h3 style="text-align:center; color:#666;">No tasks yet — create one below!</h3>
-    {% else %}
-      <table>
-        <tr>
-          <th>Task</th>
-          <th>Added</th>
-          <th>Actions</th>
-        </tr>
-        {% for task in tasks %}
-        <tr>
-          <td>{{ task.content }}</td>
-          <td>{{ task.created.strftime('%d %b %Y') }}</td>
-          <td>
-            <a href="/edit/{{ task.id }}">✏️ Edit</a> |
-            <a href="/delete/{{ task.id }}">🗑 Delete</a>
-          </td>
-        </tr>
-        {% endfor %}
-      </table>
-    {% endif %}
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
 
-    <form action="/" method="POST">
-      <input type="text" name="task" placeholder="Enter new task..." required>
-      <input type="submit" value="Add Task">
-    </form>
-  </div>
+        <form id="auth-form">
+            <input type="text" name="username" placeholder="Username" class="input-field" required>
+            <input type="password" name="password" placeholder="Password" class="input-field" required>
+
+            <button type="button" class="button-login" onclick="setActionForm('login')">Login</button>
+            <button type="button" class="button-register" onclick="setActionForm('register')">Register</button>
+            <input type="button" class="login-google" value="Login with Google" onclick="window.location.href='{{ url_for('google_login') }}'">
+        </form>
+    </div>
+
+    <script>
+        function setActionForm(action) {
+            let form = document.getElementById('auth-form');
+            if (action === 'login') {
+                form.action = "{{ url_for('login') }}";
+            } else if (action === 'register') {
+                form.action = "{{ url_for('register') }}";
+            }
+            form.method = "POST";
+            form.submit();
+        }
+    </script>
 </body>
 </html>
+

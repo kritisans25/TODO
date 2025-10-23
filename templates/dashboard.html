@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Smash 2.0</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="content">
+    <h1>📝 Task Smash 2.0</h1>
+    <p>Welcome, <strong>{{ username }}</strong>! <a href="{{ url_for('logout') }}" class="logout">Logout</a></p>
+
+    {% if tasks|length < 1 %}
+      <h3 style="text-align:center; color:#666;">No tasks yet — create one below!</h3>
+    {% else %}
+      <table>
+        <tr>
+          <th>Task</th>
+          <th>Added</th>
+          <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+          <td>{{ task.content }}</td>
+          <td>{{ task.created.strftime('%d %b %Y') }}</td>
+          <td>
+            <a href="/edit/{{ task.id }}">✏️ Edit</a> |
+            <a href="/delete/{{ task.id }}">🗑 Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+
+    <form action="{{ url_for('dashboard') }}" method="POST">
+      <input type="text" name="task" placeholder="Enter new task..." required>
+      <input type="submit" value="Add Task">
+    </form>
+
+    {% if error %}
+      <p style="color:red; text-align:center;">{{ error }}</p>
+    {% endif %}
+  </div>
+</body>
+</html>
