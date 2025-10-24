@@ -53,9 +53,7 @@ def home():
     if "username" in session:
         return redirect(url_for('dashboard'))
     return render_template('index.html')
-
-
-# ---------- Authentication ----------
+# Authentication 
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form.get('username')
